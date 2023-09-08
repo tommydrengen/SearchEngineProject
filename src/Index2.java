@@ -3,23 +3,8 @@ import java.util.Scanner;
 
 class Index2 {
 
-    WikiItem start;
-    WikiItem startFile;
-
-
-    private class WikiItem {
-        String str;
-        WikiItem next;
-
-        WikiItem(String s, WikiItem n) {
-            str = s;
-            next = n;
-        }
-    }
-
-    // ReturnObject returnObject;
     int occurences = 0;  // Obs!!
-    public String [] fileNames = {
+    public final String [] fileNames = {
             "../files/testFile1.txt", "../files/testFile2.txt"
             /*"../files/WestburyLab.wikicorp.201004.txt",
             "../files/WestburyLab.wikicorp.201004_1MB.txt",
@@ -35,23 +20,19 @@ class Index2 {
             "../files/WestburyLab.wikicorp.201004_800MB.txt"*/
     };
 
-    public Index2(String filename) {
+    WikiItem start;
 
-        // make file list
-        String file;
-        WikiItem currentFile, tmpFile;
-        int j = 0;
-        file = filename;
-        startFile = new WikiItem(file, null);
-        currentFile = startFile;
-        while ( fileNames[j] != null){
-            currentFile = new WikiItem(fileNames[j],null);
-            tmpFile = currentFile;
-            j++;
+    private class WikiItem {
+        String str;
+        WikiItem next;
+
+        WikiItem(String s, WikiItem n) {
+            str = s;
+            next = n;
         }
-        System.out.println(startFile.str + startFile.next);
+    }
 
-
+    public Index2(String filename) {
         String word;
         WikiItem current, tmp;
         try {
@@ -61,9 +42,7 @@ class Index2 {
             current = start;
             while (input.hasNext()) {   // Read all words in input
                 word = input.next();
-//   Obs!!
-              //  System.out.println(word);   //Obs!!
- //  Obs!!
+                System.out.println(word);
                 tmp = new WikiItem(word, null);
                 current.next = tmp;
                 current = tmp;
@@ -72,65 +51,41 @@ class Index2 {
         } catch (FileNotFoundException e) {
             System.out.println("Error reading file " + filename);
         }
-
     }
 
-
-        public boolean search(String searchstr) {
-            WikiItem current = start;
-            while (current != null) {
-                if (current.str.equals(searchstr)) {
-                    return true;
-                }
-                current = current.next;
-            }
-            return false;
-        }
-
-
-//////////////////////////////////////////
-
-    public int searchNCount(String searchstr) {
+    public boolean search(String searchstr) {
         WikiItem current = start;
         while (current != null) {
             if (current.str.equals(searchstr)) {
-                occurences = occurences+1;    //her !
+                return true;
             }
             current = current.next;
         }
-        return occurences;
+        return false;
     }
 
+ //   public String searchFiles(String searchstr){
+    //  }
+
     public static void main(String[] args) {
-
-
-        for (String tmpFile : fileNames) {
-            currentFile = tmpFile;
-            System.out.println("Preprocessing " + currentFile);
-            Index2 i = new Index2(currentFile);
-            String searchstr = "one"; //console.nextLine(); // = args[0]; =  "this"; // "anarchy"; //console.nextLine();   Obs!!
-            if (i.search(searchstr)) {
-                System.out.println("filnavn: " + currentFile + "  tekststreng: "
-                        + searchstr + " exists  " + "   antal_forekomster: "+
-                        i.searchNCount(searchstr) + " i " + currentFile);
-                //System.out.println(searchstr + " exists  " );
-                } else {
-                System.out.println(searchstr + " does not exist");
+        Index2 i = new Index2("");
+        for(int j = 0; j < i.fileNames.length; j++){
+            System.out.println("Preprocessing " + i.fileNames[j]);
+            i = new Index2(i.fileNames[j]);
+            Scanner console = new Scanner(System.in);
+            for (;;) {
+                System.out.println("Input search string or type exit to stop");
+                String searchstr = console.nextLine();
+                if (searchstr.equals("exit")) {
+                    break;
                 }
-
+                if (i.search(searchstr)) {
+                    System.out.println(searchstr + " exists in " + i.fileNames[j]);
+                } else {
+                    System.out.println(searchstr + " does not exist in " + i.fileNames[j]);
+                }
             }
+            console.close();
         }
-
-
-
-
-
-
-
-//        Index2 i = new Index2();
-//        System.out.println("Preprocessing " + fileNames[1]);
-//        //Index2 i2 = new Index2();
-//        String searchstr = "anarchy";// args[1]; // "this"; // "anarchy"; //console.nextLine();   Obs!!
-//        System.out.println("Startfile " + i.startFile.fileName + i.startFile.next);
-
-            }
+    }
+}
