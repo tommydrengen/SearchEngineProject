@@ -68,24 +68,29 @@ class Index2 {
     //  }
 
     public static void main(String[] args) {
-        Index2 i = new Index2("");
-        for(int j = 0; j < i.fileNames.length; j++){
-            System.out.println("Preprocessing " + i.fileNames[j]);
-            i = new Index2(i.fileNames[j]);
-            Scanner console = new Scanner(System.in);
-            for (;;) {
-                System.out.println("Input search string or type exit to stop");
-                String searchstr = console.nextLine();
-                if (searchstr.equals("exit")) {
-                    break;
-                }
+        Scanner console = new Scanner(System.in);
+        for (;;) {
+            System.out.println("Input search string or type exit to stop");
+            String searchstr = console.nextLine();
+            if (searchstr.equals("exit")) {
+                break;
+            }
+            Index2 i = new Index2("");
+            for(int j = 0; j < i.fileNames.length; j++){
+                System.out.println("Preprocessing " + i.fileNames[j]);
+                i = new Index2(i.fileNames[j]);
+
+
+
                 if (i.search(searchstr)) {
                     System.out.println(searchstr + " exists in " + i.fileNames[j]);
                 } else {
                     System.out.println(searchstr + " does not exist in " + i.fileNames[j]);
                 }
+
             }
-            console.close();
+
         }
+        console.close();
     }
 }
