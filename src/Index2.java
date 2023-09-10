@@ -163,7 +163,9 @@ class Index2 {
             }
             //lav nyt ReturnItem
             i.addReturnItem(searchstr, i.startMatchFile, null);
-            System.out.println("sogestreng " + i.startReturnItem.searchstr + " er i fil " +  i.startReturnItem.startMatch +" " + i.startReturnItem.next);
+            System.out.println("Return object with searchstring " + i.startReturnItem.searchstr + " er i fil " +  i.startReturnItem.startMatch  +" " + i.startReturnItem.next);
+            //System.out.println("item 2  " + i.startReturnItem.next.searchstr + " er i fil " +  i.startReturnItem.next.startMatch +" " + i.startReturnItem.next);
+
 
             //i.displayWikiItemList(i.startMatchFile.next);
             //i.displayWikiItemList(i.start);
