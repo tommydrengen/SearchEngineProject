@@ -5,7 +5,7 @@ class Index2 {
 
     int occurences = 0;  // Obs!!
     public final String [] fileNames = {
-            "../files/testFile1.txt", "../files/testFile2.txt"
+            "../files/testFile1.txt", "../files/testFile2.txt", "../files/testFile2.txt"
             /*"../files/WestburyLab.wikicorp.201004.txt",
             "../files/WestburyLab.wikicorp.201004_1MB.txt",
             "../files/WestburyLab.wikicorp.201004_2MB.txt",
@@ -21,6 +21,10 @@ class Index2 {
     };
 
     WikiItem start;
+    // WikiItem startFile;
+    WikiItem startMatchFile, tmpMatchFile;
+    ReturnItem startReturnItem, tmpReturnItem;
+    //    WikiItem matchFileStart;
 
     private class WikiItem {
         String str;
@@ -30,6 +34,19 @@ class Index2 {
             str = s;
             next = n;
         }
+    }
+
+    private class ReturnItem{
+        String searchstr;
+        WikiItem startMatch;
+        ReturnItem next;
+
+        ReturnItem(String str, WikiItem match, ReturnItem nextItem){
+            searchstr = str;
+            startMatch = match;
+            next = nextItem;
+        }
+
     }
 
     public Index2(String filename) {
@@ -42,7 +59,7 @@ class Index2 {
             current = start;
             while (input.hasNext()) {   // Read all words in input
                 word = input.next();
-                System.out.println(word);
+                // System.out.println(word);
                 tmp = new WikiItem(word, null);
                 current.next = tmp;
                 current = tmp;
@@ -50,6 +67,7 @@ class Index2 {
             input.close();
         } catch (FileNotFoundException e) {
             System.out.println("Error reading file " + filename);
+            // e.printStackTrace();
         }
     }
 
@@ -63,6 +81,53 @@ class Index2 {
         }
         return false;
     }
+    public void addMatchFileItem(String newFileName){
+        WikiItem currentMatchFile = startMatchFile;
+        if (this.startMatchFile == null) {
+            this.startMatchFile = new WikiItem(newFileName, null);
+        }
+        else {
+            tmpMatchFile = startMatchFile;
+
+            while (tmpMatchFile.next != null) {   // Read all words in input
+                tmpMatchFile = tmpMatchFile.next;
+                tmpMatchFile = new WikiItem(newFileName, null);
+                currentMatchFile.next = tmpMatchFile;
+                currentMatchFile = tmpMatchFile;
+            }
+            tmpMatchFile.next = new WikiItem(newFileName, null);
+        }
+    }
+
+    public void addReturnItem(String searchstr, WikiItem startMatchFile, ReturnItem next){
+            ReturnItem currentReturnItem = startReturnItem;
+            if (this.startReturnItem == null) {
+                this.startReturnItem = new ReturnItem(searchstr, startMatchFile, null);
+            }
+            else {
+                tmpReturnItem = new ReturnItem(searchstr, startMatchFile, null);
+                while (currentReturnItem != null){
+                    tmpReturnItem = tmpReturnItem.next;
+                    currentReturnItem = tmpReturnItem;
+                }
+                //currentReturnItem = new ReturnItem(searchstr, startMatchFile, null);
+                currentReturnItem = currentReturnItem;
+
+            }
+        }
+
+    void displayWikiItemList(WikiItem startObj){
+        WikiItem tmpWikiItem = startObj;
+        while (tmpWikiItem != null){
+            tmpWikiItem = tmpWikiItem.next;
+            System.out.println("fra display metode : " + tmpWikiItem + "   streng:  " + tmpWikiItem.str );
+        }
+    }
+
+
+
+
+
 
  //   public String searchFiles(String searchstr){
     //  }
@@ -75,21 +140,33 @@ class Index2 {
             if (searchstr.equals("exit")) {
                 break;
             }
-            Index2 i = new Index2("");
+            Index2 i = new Index2("../files/testFile1.txt");
             for(int j = 0; j < i.fileNames.length; j++){
-                System.out.println("Preprocessing " + i.fileNames[j]);
+                // System.out.println("Preprocessing " + i.fileNames[j]);
                 i = new Index2(i.fileNames[j]);
-
-
 
                 if (i.search(searchstr)) {
                     System.out.println(searchstr + " exists in " + i.fileNames[j]);
+                    // lav nyt WikiItem for fil med ordet
+
+                    i.addMatchFileItem(i.fileNames[j]);
+                    System.out.println("fra str+ " + i.startMatchFile);
+                    System.out.println("fra next+ " + i.startMatchFile.next);
+                    for (String f: i.fileNames) {
+                        System.out.println(f);
+
+                    }
                 } else {
                     System.out.println(searchstr + " does not exist in " + i.fileNames[j]);
                 }
 
             }
+            //lav nyt ReturnItem
+            i.addReturnItem(searchstr, i.startMatchFile, null);
+            System.out.println("sogestreng " + i.startReturnItem.searchstr + " er i fil " +  i.startReturnItem.startMatch +" " + i.startReturnItem.next);
 
+            //i.displayWikiItemList(i.startMatchFile.next);
+            //i.displayWikiItemList(i.start);
         }
         console.close();
     }
