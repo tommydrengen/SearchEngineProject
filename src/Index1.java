@@ -37,14 +37,30 @@ class Index1 {
     }
 
     public boolean search(String searchstr) {
+        boolean exists = false;
+        int occurences = 0;
+        String documentName = "";
+        String returnString = "";
         WikiItem current = start;
+        documentName = start.str; // first document
         while (current != null) {
             if (current.str.equals(searchstr)) {
-                return true;
+                occurences++;
+                exists = true;
             }
+            if (current.str.equals("---END.OF.DOCUMENT---")){
+                if(occurences>0){
+                    returnString += documentName + ": " + occurences +"\n";
+                }
+                if (current.next != null) documentName = current.next.str;
+                occurences = 0;
+            }
+
             current = current.next;
         }
-        return false;
+        System.out.println("ReturnString:  \n" + returnString);
+        returnString ="";
+        return exists;
     }
 
     public static void main(String[] args) {
