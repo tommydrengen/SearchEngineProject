@@ -49,7 +49,7 @@ class Index1 {
                 exists = true;
             }
             if (current.str.equals("---END.OF.DOCUMENT---")){
-                if(occurences>0){
+                if(occurences > 0){
                     returnString += documentName + ": " + occurences +"\n";
                 }
                 if (current.next != null) documentName = current.next.str;
