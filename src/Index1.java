@@ -39,7 +39,7 @@ class Index1 {
     public boolean search(String searchstr) {
         boolean exists = false;
         int occurences = 0;
-        String documentName = "";
+        String documentName = start.str;
         String returnString = "";
         WikiItem current = start;
 
@@ -58,14 +58,8 @@ class Index1 {
                     documentName = "";
                     while (!current.str.endsWith(".")){
                         documentName += current.next.str + " "; // next document
-                        //if (current.next !=null) current = current.next;
                         current = current.next;
                     }
-                    //documentName += current.str;
-                    //if (documentName.endsWith(" ")); documentName = documentName.substring(0,documentName.length-2);
-
-
-
                 }
                 occurences = 0;
             }
@@ -80,6 +74,8 @@ class Index1 {
     public static void main(String[] args) {
         System.out.println("Preprocessing " + args[0]);
         Index1 i = new Index1(args[0]);
+        //i.displayWikiList(i.start);
+        //i.skrivTilFil(i.start);
         Scanner console = new Scanner(System.in);
         for (;;) {
             System.out.println("Input search string or type exit to stop");
@@ -94,5 +90,28 @@ class Index1 {
             }
         }
         console.close();
+    }
+
+
+    public void displayWikiList(WikiItem head){
+        int tal = 0;
+        WikiItem current = head;
+        while (current != null){
+            tal = tal +1; if(tal > 2889){break;}
+            System.out.println("   " + tal + "  ->" + current.str + "<-");
+            current = current.next;}
+
+    }
+
+    public void skrivTilFil(WikiItem head){
+        try{
+            PrintWriter writer = new PrintWriter("../files/output.txt");
+            WikiItem current = head;
+            while (current != null) {
+                writer.println(current.str );
+                current= current.next;
+            }
+            writer.close();
+        } catch (FileNotFoundException e){System.out.println("fil ikke fundet");}
     }
 }
