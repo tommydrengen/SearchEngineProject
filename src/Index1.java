@@ -42,7 +42,9 @@ class Index1 {
         String documentName = "";
         String returnString = "";
         WikiItem current = start;
-        documentName = start.str; // first document
+
+        //documentName = current.str; // first document
+        
         while (current != null) {
             if (current.str.equals(searchstr)) {
                 occurences++;
@@ -52,7 +54,19 @@ class Index1 {
                 if(occurences > 0){
                     returnString += documentName + ": " + occurences +"\n";
                 }
-                if (current.next != null) documentName = current.next.str;
+                if (current.next != null) {
+                    documentName = "";
+                    while (!current.str.endsWith(".")){
+                        documentName += current.next.str + " "; // next document
+                        //if (current.next !=null) current = current.next;
+                        current = current.next;
+                    }
+                    //documentName += current.str;
+                    //if (documentName.endsWith(" ")); documentName = documentName.substring(0,documentName.length-2);
+
+
+
+                }
                 occurences = 0;
             }
 
