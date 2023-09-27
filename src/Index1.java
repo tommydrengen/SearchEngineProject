@@ -3,7 +3,9 @@ import java.util.Scanner;
 
 class Index1 {
 
-    WikiItem start;
+    WikiItem start, startDoc, tmpDoc, currentDoc;
+    ReturnItem startReturnItem, currentReturnItem, tmpReturnItem;
+
 
     private class WikiItem {
         String str;
@@ -11,6 +13,19 @@ class Index1 {
 
         WikiItem(String s, WikiItem n) {
             str = s;
+            next = n;
+        }
+    }
+
+    // klasse til at holde 3 felter
+    private class ReturnItem{
+        String      searchstr;
+        WikiItem    startfile;
+        ReturnItem  next;
+
+        ReturnItem(String str, WikiItem ff, ReturnItem n) {
+            searchstr  = str;
+            startfile = ff;
             next = n;
         }
     }
@@ -42,9 +57,12 @@ class Index1 {
         String documentName = start.str;
         String returnString = "";
         WikiItem current = start;
+        // ReturnItem startReturnItem, currentReturnItem, tmpReturnItem;
 
         //documentName = current.str; // first document
-        
+        startDoc = null; // delete last search
+        // startReturnItem = null;
+
         while (current != null) {
             if (current.str.equals(searchstr)) {
                 occurences++;
@@ -53,6 +71,17 @@ class Index1 {
             if (current.str.equals("---END.OF.DOCUMENT---")){
                 if(occurences > 0){
                     returnString += documentName + ": " + occurences +"\n";
+                    if (startDoc == null){
+                        startDoc = new WikiItem(documentName,null);
+                    }
+                    else {
+                        currentDoc = startDoc;
+                        while (currentDoc.next != null){
+                            currentDoc = currentDoc.next;
+                        }
+                        currentDoc.next = new WikiItem(documentName, null);
+                        currentDoc = currentDoc.next;
+                    }
                 }
                 if (current.next != null) {
                     documentName = "";
@@ -67,6 +96,22 @@ class Index1 {
             current = current.next;
         }
         System.out.println("ReturnString:  \n" + returnString);
+
+        if (startReturnItem == null){
+            startReturnItem = new ReturnItem(searchstr, startDoc, null);
+        }
+        else {
+            currentReturnItem = startReturnItem;
+            while (currentReturnItem.next != null){
+                currentReturnItem = currentReturnItem.next;
+            }
+            currentReturnItem.next = new ReturnItem(searchstr, startDoc, null);
+            currentReturnItem = currentReturnItem.next;
+        }
+
+        skrivTilFil(startDoc);
+        skrivReturnItemTilFil(startReturnItem);
+        //displayWikiList(startDoc);
         returnString ="";
         return exists;
     }
@@ -76,6 +121,8 @@ class Index1 {
         Index1 i = new Index1(args[0]);
         //i.displayWikiList(i.start);
         //i.skrivTilFil(i.start);
+        //for each word in start, call search
+
         Scanner console = new Scanner(System.in);
         for (;;) {
             System.out.println("Input search string or type exit to stop");
@@ -108,9 +155,29 @@ class Index1 {
             PrintWriter writer = new PrintWriter("../files/output.txt");
             WikiItem current = head;
             while (current != null) {
-                writer.println(current.str );
+                writer.println("current object'et: " +
+                        String.format("%25s", current)  +
+                        "  current.str: " + String.format("%40s", current.str) +
+                        " current.next:  " + current.next );current= current.next;
+            }
+            writer.close();
+        } catch (FileNotFoundException e){System.out.println("fil ikke fundet");}
+    }
+
+    public void skrivReturnItemTilFil(ReturnItem head){
+        try{
+            PrintWriter writer = new PrintWriter("../files/ReturnItem.txt");
+            ReturnItem current = head;
+            String printStr = "";
+            while (current != null) {
+                printStr += "current object'et: " +
+                        String.format("%25s", current)  +
+                        "  current.str: " + String.format("%40s", current.searchstr) +
+                        "  current.startFile: " + String.format("%40s", current.startfile.str) +
+                        " current.next:  " + current.next;
                 current= current.next;
             }
+            writer.println(printStr);
             writer.close();
         } catch (FileNotFoundException e){System.out.println("fil ikke fundet");}
     }
