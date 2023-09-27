@@ -172,7 +172,7 @@ class Index1 {
             while (current != null) {
                 printStr += "current object'et: " +
                         String.format("%25s", current)  +
-                        "  current.str: " + String.format("%40s", current.searchstr) +
+                        "  current.searchstr: " + String.format("%40s", current.searchstr) +
                         "  current.startFile: " + String.format("%40s", current.startfile.str) +
                         " current.next:  " + current.next;
                 current= current.next;
