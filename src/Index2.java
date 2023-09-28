@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.Scanner;
 
-class Index1 {
+class Index2 {
 
     WikiItem start, startDoc, tmpDoc, currentDoc;
     ReturnItem startReturnItem, currentReturnItem, tmpReturnItem;
@@ -30,7 +30,7 @@ class Index1 {
         }
     }
 
-    public Index1(String filename) {
+    public Index2(String filename) {
         String word;
         WikiItem current, tmp;
         try {
@@ -161,7 +161,7 @@ class Index1 {
                         " current.next:  " + current.next );current= current.next;
             }
             writer.close();
-        } catch (FileNotFoundException e){System.out.println("file not found");}
+        } catch (FileNotFoundException e){System.out.println("fil ikke fundet");}
     }
 
     public void skrivReturnItemTilFil(ReturnItem head){
@@ -179,6 +179,6 @@ class Index1 {
             }
             writer.println(printStr);
             writer.close();
-        } catch (FileNotFoundException e){System.out.println("file not found");}
+        } catch (FileNotFoundException e){System.out.println("fil ikke fundet");}
     }
 }

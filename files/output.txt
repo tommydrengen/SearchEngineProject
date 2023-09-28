@@ -1,43 +1,50 @@
-current object'et:  Index1$WikiItem@2f4d3709  current.str:                               Anarchism. current.next:  Index1$WikiItem@4e50df2e
-current object'et:  Index1$WikiItem@4e50df2e  current.str:                                 Autism.  current.next:  Index1$WikiItem@1d81eb93
-current object'et:  Index1$WikiItem@1d81eb93  current.str:                                 Albedo.  current.next:  Index1$WikiItem@7291c18f
-current object'et:  Index1$WikiItem@7291c18f  current.str:                                Alabama.  current.next:  Index1$WikiItem@34a245ab
-current object'et:  Index1$WikiItem@34a245ab  current.str:                               Achilles.  current.next:  Index1$WikiItem@7cc355be
-current object'et:  Index1$WikiItem@7cc355be  current.str:                        Abraham Lincoln.  current.next:  Index1$WikiItem@6e8cf4c6
-current object'et:  Index1$WikiItem@6e8cf4c6  current.str:                              Aristotle.  current.next:  Index1$WikiItem@12edcd21
-current object'et:  Index1$WikiItem@12edcd21  current.str:                          Academy Award.  current.next:  Index1$WikiItem@34c45dca
-current object'et:  Index1$WikiItem@34c45dca  current.str:              International Atomic Time.  current.next:  Index1$WikiItem@52cc8049
-current object'et:  Index1$WikiItem@52cc8049  current.str:                               Altruism.  current.next:  Index1$WikiItem@5b6f7412
-current object'et:  Index1$WikiItem@5b6f7412  current.str:                               Ayn Rand.  current.next:  Index1$WikiItem@27973e9b
-current object'et:  Index1$WikiItem@27973e9b  current.str:                                Algeria.  current.next:  Index1$WikiItem@312b1dae
-current object'et:  Index1$WikiItem@312b1dae  current.str:      List of Atlas Shrugged characters.  current.next:  Index1$WikiItem@7530d0a
-current object'et:   Index1$WikiItem@7530d0a  current.str:                           Anthropology.  current.next:  Index1$WikiItem@27bc2616
-current object'et:  Index1$WikiItem@27bc2616  current.str:                   Agricultural science.  current.next:  Index1$WikiItem@3941a79c
-current object'et:  Index1$WikiItem@3941a79c  current.str:                                Alchemy.  current.next:  Index1$WikiItem@506e1b77
-current object'et:  Index1$WikiItem@506e1b77  current.str:                                Austria.  current.next:  Index1$WikiItem@4fca772d
-current object'et:  Index1$WikiItem@4fca772d  current.str:                               Amoeboid.  current.next:  Index1$WikiItem@9807454
-current object'et:   Index1$WikiItem@9807454  current.str:                                  ASCII.  current.next:  Index1$WikiItem@3d494fbf
-current object'et:  Index1$WikiItem@3d494fbf  current.str:                              Animation.  current.next:  Index1$WikiItem@1ddc4ec2
-current object'et:  Index1$WikiItem@1ddc4ec2  current.str:                                 Apollo.  current.next:  Index1$WikiItem@133314b
-current object'et:   Index1$WikiItem@133314b  current.str:                           Andre Agassi.  current.next:  Index1$WikiItem@b1bc7ed
-current object'et:   Index1$WikiItem@b1bc7ed  current.str:                  Afroasiatic languages.  current.next:  Index1$WikiItem@7cd84586
-current object'et:  Index1$WikiItem@7cd84586  current.str:                                Andorra.  current.next:  Index1$WikiItem@30dae81
-current object'et:   Index1$WikiItem@30dae81  current.str:                        Arithmetic mean.  current.next:  Index1$WikiItem@1b2c6ec2
-current object'et:  Index1$WikiItem@1b2c6ec2  current.str:                            Animal Farm.  current.next:  Index1$WikiItem@4edde6e5
-current object'et:  Index1$WikiItem@4edde6e5  current.str:                              Amphibian.  current.next:  Index1$WikiItem@70177ecd
-current object'et:  Index1$WikiItem@70177ecd  current.str:                                 Alaska.  current.next:  Index1$WikiItem@1e80bfe8
-current object'et:  Index1$WikiItem@1e80bfe8  current.str:                            Agriculture.  current.next:  Index1$WikiItem@66a29884
-current object'et:  Index1$WikiItem@66a29884  current.str:                          Aldous Huxley.  current.next:  Index1$WikiItem@4769b07b
-current object'et:  Index1$WikiItem@4769b07b  current.str:                                  Algae.  current.next:  Index1$WikiItem@cc34f4d
-current object'et:   Index1$WikiItem@cc34f4d  current.str:                   Analysis of variance.  current.next:  Index1$WikiItem@17a7cec2
-current object'et:  Index1$WikiItem@17a7cec2  current.str:                                 Alkane.  current.next:  Index1$WikiItem@65b3120a
-current object'et:  Index1$WikiItem@65b3120a  current.str:                                 Appeal.  current.next:  Index1$WikiItem@6f539caf
-current object'et:  Index1$WikiItem@6f539caf  current.str:                                 Answer.  current.next:  Index1$WikiItem@79fc0f2f
-current object'et:  Index1$WikiItem@79fc0f2f  current.str:                   Assistive technology.  current.next:  Index1$WikiItem@50040f0c
-current object'et:  Index1$WikiItem@50040f0c  current.str:                                 Abacus.  current.next:  Index1$WikiItem@2dda6444
-current object'et:  Index1$WikiItem@2dda6444  current.str:                                   Acid.  current.next:  Index1$WikiItem@5e9f23b4
-current object'et:  Index1$WikiItem@5e9f23b4  current.str:                                Asphalt.  current.next:  Index1$WikiItem@4783da3f
-current object'et:  Index1$WikiItem@4783da3f  current.str:                              Apollo 11.  current.next:  Index1$WikiItem@378fd1ac
-current object'et:  Index1$WikiItem@378fd1ac  current.str:                               Apollo 8.  current.next:  Index1$WikiItem@49097b5d
-current object'et:  Index1$WikiItem@49097b5d  current.str:                              Astronaut.  current.next:  Index1$WikiItem@6e2c634b
-current object'et:  Index1$WikiItem@6e2c634b  current.str:                      A Modest Proposal.  current.next:  null
+current object'et:  Index1$WikiItem@279f2327  current.str:                               Anarchism. current.next:  Index1$WikiItem@2ff4acd0
+current object'et:  Index1$WikiItem@2ff4acd0  current.str:                                 Autism.  current.next:  Index1$WikiItem@3f99bd52
+current object'et:  Index1$WikiItem@3f99bd52  current.str:                                 Albedo.  current.next:  Index1$WikiItem@4f023edb
+current object'et:  Index1$WikiItem@4f023edb  current.str:                                      A.  current.next:  Index1$WikiItem@3a71f4dd
+current object'et:  Index1$WikiItem@3a71f4dd  current.str:                                Alabama.  current.next:  Index1$WikiItem@7adf9f5f
+current object'et:  Index1$WikiItem@7adf9f5f  current.str:                               Achilles.  current.next:  Index1$WikiItem@85ede7b
+current object'et:   Index1$WikiItem@85ede7b  current.str:                        Abraham Lincoln.  current.next:  Index1$WikiItem@5674cd4d
+current object'et:  Index1$WikiItem@5674cd4d  current.str:                              Aristotle.  current.next:  Index1$WikiItem@63961c42
+current object'et:  Index1$WikiItem@63961c42  current.str:                   An American in Paris.  current.next:  Index1$WikiItem@65b54208
+current object'et:  Index1$WikiItem@65b54208  current.str:                          Academy Award.  current.next:  Index1$WikiItem@1be6f5c3
+current object'et:  Index1$WikiItem@1be6f5c3  current.str:                        Animalia (book).  current.next:  Index1$WikiItem@6b884d57
+current object'et:  Index1$WikiItem@6b884d57  current.str:                               Altruism.  current.next:  Index1$WikiItem@38af3868
+current object'et:  Index1$WikiItem@38af3868  current.str:                               Ayn Rand.  current.next:  Index1$WikiItem@77459877
+current object'et:  Index1$WikiItem@77459877  current.str:                           Alain Connes.  current.next:  Index1$WikiItem@5b2133b1
+current object'et:  Index1$WikiItem@5b2133b1  current.str:                                Algeria.  current.next:  Index1$WikiItem@72ea2f77
+current object'et:  Index1$WikiItem@72ea2f77  current.str:      List of Atlas Shrugged characters.  current.next:  Index1$WikiItem@33c7353a
+current object'et:  Index1$WikiItem@33c7353a  current.str:                           Anthropology.  current.next:  Index1$WikiItem@681a9515
+current object'et:  Index1$WikiItem@681a9515  current.str:                   Agricultural science.  current.next:  Index1$WikiItem@3af49f1c
+current object'et:  Index1$WikiItem@3af49f1c  current.str:                                Alchemy.  current.next:  Index1$WikiItem@19469ea2
+current object'et:  Index1$WikiItem@19469ea2  current.str:                                Austria.  current.next:  Index1$WikiItem@13221655
+current object'et:  Index1$WikiItem@13221655  current.str:                               Amoeboid.  current.next:  Index1$WikiItem@2f2c9b19
+current object'et:  Index1$WikiItem@2f2c9b19  current.str:                                  ASCII.  current.next:  Index1$WikiItem@31befd9f
+current object'et:  Index1$WikiItem@31befd9f  current.str:                              Animation.  current.next:  Index1$WikiItem@1c20c684
+current object'et:  Index1$WikiItem@1c20c684  current.str:                                 Apollo.  current.next:  Index1$WikiItem@1fb3ebeb
+current object'et:  Index1$WikiItem@1fb3ebeb  current.str:                           Andre Agassi.  current.next:  Index1$WikiItem@548c4f57
+current object'et:  Index1$WikiItem@548c4f57  current.str:                  Afroasiatic languages.  current.next:  Index1$WikiItem@1218025c
+current object'et:  Index1$WikiItem@1218025c  current.str:                                Andorra.  current.next:  Index1$WikiItem@816f27d
+current object'et:   Index1$WikiItem@816f27d  current.str:                        Arithmetic mean.  current.next:  Index1$WikiItem@87aac27
+current object'et:   Index1$WikiItem@87aac27  current.str:           American Football Conference.  current.next:  Index1$WikiItem@3e3abc88
+current object'et:  Index1$WikiItem@3e3abc88  current.str:                            Animal Farm.  current.next:  Index1$WikiItem@6ce253f1
+current object'et:  Index1$WikiItem@6ce253f1  current.str:                              Amphibian.  current.next:  Index1$WikiItem@53d8d10a
+current object'et:  Index1$WikiItem@53d8d10a  current.str:                                 Alaska.  current.next:  Index1$WikiItem@e9e54c2
+current object'et:   Index1$WikiItem@e9e54c2  current.str:                            Agriculture.  current.next:  Index1$WikiItem@65ab7765
+current object'et:  Index1$WikiItem@65ab7765  current.str:                          Aldous Huxley.  current.next:  Index1$WikiItem@1b28cdfa
+current object'et:  Index1$WikiItem@1b28cdfa  current.str:                                  Algae.  current.next:  Index1$WikiItem@eed1f14
+current object'et:   Index1$WikiItem@eed1f14  current.str:                   Analysis of variance.  current.next:  Index1$WikiItem@7229724f
+current object'et:  Index1$WikiItem@7229724f  current.str:                                 Alkane.  current.next:  Index1$WikiItem@4c873330
+current object'et:  Index1$WikiItem@4c873330  current.str:                                 Appeal.  current.next:  Index1$WikiItem@119d7047
+current object'et:  Index1$WikiItem@119d7047  current.str:                                 Answer.  current.next:  Index1$WikiItem@776ec8df
+current object'et:  Index1$WikiItem@776ec8df  current.str:                        Appellate court.  current.next:  Index1$WikiItem@4eec7777
+current object'et:  Index1$WikiItem@4eec7777  current.str:                  America the Beautiful.  current.next:  Index1$WikiItem@3b07d329
+current object'et:  Index1$WikiItem@3b07d329  current.str:                   Assistive technology.  current.next:  Index1$WikiItem@41629346
+current object'et:  Index1$WikiItem@41629346  current.str:                                 Abacus.  current.next:  Index1$WikiItem@404b9385
+current object'et:  Index1$WikiItem@404b9385  current.str:                                   Acid.  current.next:  Index1$WikiItem@6d311334
+current object'et:  Index1$WikiItem@6d311334  current.str:                                Asphalt.  current.next:  Index1$WikiItem@682a0b20
+current object'et:  Index1$WikiItem@682a0b20  current.str:  American National Standards Institute.  current.next:  Index1$WikiItem@3d075dc0
+current object'et:  Index1$WikiItem@3d075dc0  current.str:                              Apollo 11.  current.next:  Index1$WikiItem@214c265e
+current object'et:  Index1$WikiItem@214c265e  current.str:                               Apollo 8.  current.next:  Index1$WikiItem@448139f0
+current object'et:  Index1$WikiItem@448139f0  current.str:                              Astronaut.  current.next:  Index1$WikiItem@7cca494b
+current object'et:  Index1$WikiItem@7cca494b  current.str:                      A Modest Proposal.  current.next:  null
