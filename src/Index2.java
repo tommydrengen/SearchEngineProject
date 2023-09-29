@@ -118,7 +118,7 @@ class Index2 {
 
     public static void main(String[] args) {
         System.out.println("Preprocessing " + args[0]);
-        Index1 i = new Index1(args[0]);
+        Index2 i = new Index2(args[0]);
         //i.displayWikiList(i.start);
         //i.skrivTilFil(i.start);
         //for each word in start, call search

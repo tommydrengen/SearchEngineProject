@@ -110,7 +110,11 @@ class Index1 {
         }
 
         skrivTilFil(startDoc);
-        skrivReturnItemTilFil(startReturnItem);
+        if(startReturnItem != null){
+            if(startReturnItem.startDoc != null){
+                skrivReturnItemTilFil(startReturnItem);
+            }
+        }
         //displayWikiList(startDoc);
         returnString ="";
         return exists;
