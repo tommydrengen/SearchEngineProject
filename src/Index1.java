@@ -23,9 +23,9 @@ class Index1 {
         WikiItem startDoc;
         ReturnItem  next;
 
-        ReturnItem(String str, WikiItem ff, ReturnItem n) {
+        ReturnItem(String str, WikiItem startDocument, ReturnItem n) {
             searchstr  = str;
-            startDoc = ff;
+            startDoc = startDocument;
             next = n;
         }
     }
@@ -143,6 +143,25 @@ class Index1 {
         console.close();
     }
 
+    private class Bucket {
+        int key;
+        ReturnItem [3] buckets;
+        ReturnItem currentReturnItemZero, currentReturnItemOne, currentReturnItemTwo,
+                tmpReturnItemZero, tmpReturnItemOne, tmpReturnItemTwo,
+        nextReturnItemZero, nextReturnItemOne, nextReturnItemTwo;
+
+        Bucket(ReturnItem start){
+            buckets = new WikiItem[3];
+
+        }
+        insert(String str){
+            if(buckets[str.length % 3] == null){
+                buckets[str.length % 3] = new ReturnItem(str,null);
+            }
+        }
+    }
+
+
 
     public void displayWikiList(WikiItem head){
         int tal = 0;
@@ -169,20 +188,29 @@ class Index1 {
     }
 
     public void skrivReturnItemTilFil(ReturnItem head){
-        try{
+        try {
             PrintWriter writer = new PrintWriter("../files/ReturnItem.txt");
             ReturnItem current = head;
             String printStr = "";
             while (current != null) {
                 printStr += "current object'et: " +
-                        String.format("%25s", current)  +
-                        "  current.searchstr: " + String.format("%40s", current.searchstr) +
-                        "  current.startDoc: " + String.format("%40s", current.startDoc.str) +
-                        " current.next:  " + current.next;
-                current= current.next;
+                        String.format("%25s", current) +
+                        "  current.searchstr: " + String.format("%40s", current.searchstr);
+
+                // Check if startDoc is not null before accessing its str property
+                if (current.startDoc != null) {
+                    printStr += "  current.startDoc: " + String.format("%40s", current.startDoc.str);
+                } else {
+                    printStr += "  current.startDoc: <null>"; // Handle null case
+                }
+
+                printStr += " current.next:  " + current.next;
+                current = current.next;
             }
             writer.println(printStr);
             writer.close();
-        } catch (FileNotFoundException e){System.out.println("file not found");}
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
     }
 }

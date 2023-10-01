@@ -1,0 +1,1 @@
+current object'et: Index2$ReturnItem@3b9a45b3  current.searchstr:                                      one  current.startDoc:                               Anarchism. current.next:  Index2$ReturnItem@58372a00current object'et: Index2$ReturnItem@58372a00  current.searchstr:                                       oo  current.startDoc: <null> current.next:  null
