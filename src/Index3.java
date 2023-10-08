@@ -71,12 +71,8 @@ class Index3 {
         } catch (FileNotFoundException e) {
             System.out.println("Error reading file " + filename);
         }
-        // proeve kald search2 med alle ord i startDistinct
+        // call search2 med alle ord i startDistinct
         startReturnItem = search3(startDistinct.str);
-
-
-
-
     }
 
 
@@ -111,9 +107,6 @@ class Index3 {
         String documentName = start.str;
         String returnString = "";
         WikiItem current = start;
-        // ReturnItem startReturnItem, currentReturnItem, tmpReturnItem;
-
-        //documentName = current.str; // first document
         startDoc = null; // delete last search
         // startReturnItem = null;
 
@@ -146,7 +139,6 @@ class Index3 {
                 }
                 occurences = 0;
             }
-
             current = current.next;
         }
         System.out.println("ReturnString:  \n" + returnString);
@@ -162,12 +154,7 @@ class Index3 {
             currentReturnItem.next = new ReturnItem(searchstr, startDoc, null);
             currentReturnItem = currentReturnItem.next;
         }
-
-
-
-        //displayWikiList(startDoc);
         returnString ="";
-        //return exists;
         return startReturnItem;
     }
 
