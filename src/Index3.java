@@ -262,7 +262,7 @@ class Index3 {
                     printStr += "  current.startDoc: <null>"; // Handle null case
                 }
 
-                printStr += " current.next:  " + current.next;
+                printStr += " current.next:  " + current.next + "\n";
                 current = current.next;
             }
             writer.print(printStr);
