@@ -73,17 +73,7 @@ class Index3 {
         }
         // proeve kald search2 med alle ord i startDistinct
         startReturnItem = search3(startDistinct.str);
-        /*currentDistinct = startDistinct;
-        currentReturnItem = startReturnItem;
 
-        while (currentDistinct != null){
-
-            tmpReturnItem = search2(currentDistinct.str);
-            currentReturnItem.next = tmpReturnItem;
-            currentReturnItem = currentReturnItem.next;
-            currentDistinct = currentDistinct.next;
-
-        }*/
 
 
 
@@ -197,6 +187,21 @@ class Index3 {
         return startReturnItem;
     }
 
+    public ReturnItem search4(String searchstr){
+        String word;
+        currentReturnItem = startReturnItem;
+        while (currentReturnItem != null){
+            if(currentReturnItem.searchstr.equals(searchstr)){
+                System.out.println(currentReturnItem.searchstr);
+                System.out.println(currentReturnItem.startDoc);
+
+                return currentReturnItem;
+            }
+            currentReturnItem = currentReturnItem.next;
+        }
+        return new ReturnItem("",new WikiItem("",null),null);
+    }
+
     public static void main(String[] args) {
         System.out.println("Preprocessing " + args[0]);
         Index3 i = new Index3(args[0]);
@@ -211,7 +216,10 @@ class Index3 {
                 break;
             }
             if (i.search(searchstr)) {
-                System.out.println(searchstr + " exists");
+                System.out.println(searchstr + " exists in startDoc: ");
+                ReturnItem returnItem = i.search4(searchstr);
+                System.out.println(returnItem.searchstr);
+                i.displayWikiList(returnItem.startDoc);
             } else {
                 System.out.println(searchstr + " does not exist");
             }
