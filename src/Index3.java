@@ -42,7 +42,7 @@ class Index3 {
             current = start;
             while (input.hasNext()) {   // Read all words in input
                 word = input.next();
-//***                System.out.println(word);
+                System.out.println(word);
                 tmp = new WikiItem(word, null);
                 current.next = tmp;
                 current = tmp;
@@ -71,8 +71,6 @@ class Index3 {
         } catch (FileNotFoundException e) {
             System.out.println("Error reading file " + filename);
         }
-        // call search2 med alle ord i startDistinct
-        startReturnItem = search3(startDistinct.str);
     }
 
 
@@ -141,7 +139,7 @@ class Index3 {
             }
             current = current.next;
         }
-        System.out.println("ReturnString:  \n" + returnString);
+        //System.out.println("ReturnString:  \n" + returnString);
 
         if (startReturnItem == null){
             startReturnItem = new ReturnItem(searchstr, startDoc, null);
@@ -176,11 +174,18 @@ class Index3 {
 
     public ReturnItem search4(String searchstr){
         String word;
+        startReturnItem = search3(searchstr);
         currentReturnItem = startReturnItem;
         while (currentReturnItem != null){
             if(currentReturnItem.searchstr.equals(searchstr)){
-                System.out.println(currentReturnItem.searchstr);
-                System.out.println(currentReturnItem.startDoc);
+                System.out.println("Documents containing the search string \" " + currentReturnItem.searchstr + "\": ");
+                System.out.println();
+                currentDoc = currentReturnItem.startDoc;
+                while (currentDoc!=null){
+                    // System.out.println(currentDoc.str);
+                    currentDoc = currentDoc.next;
+                }
+                //System.out.println(currentReturnItem.startDoc);
 
                 return currentReturnItem;
             }
@@ -203,7 +208,7 @@ class Index3 {
                 break;
             }
             if (i.search(searchstr)) {
-                System.out.println(searchstr + " exists in startDoc: ");
+                //System.out.println(searchstr + " exists in startDoc: ");
                 ReturnItem returnItem = i.search4(searchstr);
                 System.out.println(returnItem.searchstr);
                 i.displayWikiList(returnItem.startDoc);
@@ -220,7 +225,7 @@ class Index3 {
         WikiItem current = head;
         while (current != null){
             tal = tal +1; if(tal > 2889){break;}
-            System.out.println("   " + tal + "  ->" + current.str + "<-");
+            System.out.println("   " + tal + " : " + current.str);
             current = current.next;}
 
     }
@@ -234,7 +239,8 @@ class Index3 {
                 writer.println("current object'et: " +
                         String.format("%25s", current)  +
                         "  current.str: " + String.format("%40s", current.str) +
-                        " current.next:  " + current.next );current= current.next;
+                        " current.next:  " + current.next );
+                current= current.next;
             }
             writer.close();
         } catch (FileNotFoundException e){System.out.println("file not found");}

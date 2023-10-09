@@ -3,9 +3,7 @@ import java.util.Scanner;
 
 class Index1 {
 
-    WikiItem start, startDoc, tmpDoc, currentDoc;
-    ReturnItem startReturnItem, currentReturnItem, tmpReturnItem;
-
+    WikiItem start;
 
     private class WikiItem {
         String str;
@@ -13,19 +11,6 @@ class Index1 {
 
         WikiItem(String s, WikiItem n) {
             str = s;
-            next = n;
-        }
-    }
-
-    // klasse til at holde 3 felter
-    private class ReturnItem{
-        String      searchstr;
-        WikiItem startDoc;
-        ReturnItem  next;
-
-        ReturnItem(String str, WikiItem startDocument, ReturnItem n) {
-            searchstr  = str;
-            startDoc = startDocument;
             next = n;
         }
     }
@@ -52,81 +37,19 @@ class Index1 {
     }
 
     public boolean search(String searchstr) {
-        boolean exists = false;
-        int occurences = 0;
-        String documentName = start.str;
-        String returnString = "";
         WikiItem current = start;
-        // ReturnItem startReturnItem, currentReturnItem, tmpReturnItem;
-
-        //documentName = current.str; // first document
-        startDoc = null; // delete last search
-        // startReturnItem = null;
-
         while (current != null) {
             if (current.str.equals(searchstr)) {
-                occurences++;
-                exists = true;
+                return true;
             }
-            if (current.str.equals("---END.OF.DOCUMENT---")){
-                if(occurences > 0){
-                    returnString += documentName + ": " + occurences +"\n";
-                    if (startDoc == null){
-                        startDoc = new WikiItem(documentName,null);
-                    }
-                    else {
-                        currentDoc = startDoc;
-                        while (currentDoc.next != null){
-                            currentDoc = currentDoc.next;
-                        }
-                        currentDoc.next = new WikiItem(documentName, null);
-                        currentDoc = currentDoc.next;
-                    }
-                }
-                if (current.next != null) {
-                    documentName = "";
-                    while (!current.str.endsWith(".")){
-                        documentName += current.next.str + " "; // next document
-                        current = current.next;
-                    }
-                }
-                occurences = 0;
-            }
-
             current = current.next;
         }
-        System.out.println("ReturnString:  \n" + returnString);
-
-        if (startReturnItem == null){
-            startReturnItem = new ReturnItem(searchstr, startDoc, null);
-        }
-        else {
-            currentReturnItem = startReturnItem;
-            while (currentReturnItem.next != null){
-                currentReturnItem = currentReturnItem.next;
-            }
-            currentReturnItem.next = new ReturnItem(searchstr, startDoc, null);
-            currentReturnItem = currentReturnItem.next;
-        }
-
-        //skrivTilFil(startDoc);
-        if(startReturnItem != null){
-            if(startReturnItem.startDoc != null){
-                skrivReturnItemTilFil(startReturnItem);
-            }
-        }
-        //displayWikiList(startDoc);
-        returnString ="";
-        return exists;
+        return false;
     }
 
     public static void main(String[] args) {
         System.out.println("Preprocessing " + args[0]);
         Index1 i = new Index1(args[0]);
-        //i.displayWikiList(i.start);
-        //i.skrivTilFil(i.start);
-        //for each word in start, call search
-
         Scanner console = new Scanner(System.in);
         for (;;) {
             System.out.println("Input search string or type exit to stop");
@@ -141,58 +64,5 @@ class Index1 {
             }
         }
         console.close();
-    }
-
-
-
-    public void displayWikiList(WikiItem head){
-        int tal = 0;
-        WikiItem current = head;
-        while (current != null){
-            tal = tal +1; if(tal > 2889){break;}
-            System.out.println("   " + tal + "  ->" + current.str + "<-");
-            current = current.next;}
-
-    }
-
-    public void skrivTilFil(WikiItem head){
-        try{
-            PrintWriter writer = new PrintWriter("../files/output.txt");
-            WikiItem current = head;
-            while (current != null) {
-                writer.println("current object'et: " +
-                        String.format("%25s", current)  +
-                        "  current.str: " + String.format("%40s", current.str) +
-                        " current.next:  " + current.next );current= current.next;
-            }
-            writer.close();
-        } catch (FileNotFoundException e){System.out.println("file not found");}
-    }
-
-    public void skrivReturnItemTilFil(ReturnItem head){
-        try {
-            PrintWriter writer = new PrintWriter("../files/ReturnItem.txt");
-            ReturnItem current = head;
-            String printStr = "";
-            while (current != null) {
-                printStr += "current searchstr: " + current.searchstr +
-                        String.format("%25s", current) +
-                        "  current.searchstr: " + String.format("%40s", current.searchstr);
-
-                // Check if startDoc is not null before accessing its str property
-                if (current.startDoc != null) {
-                    printStr += "  current.startDoc: " + String.format("%40s", current.startDoc.str);
-                } else {
-                    printStr += "  current.startDoc: <null>"; // Handle null case
-                }
-
-                printStr += " current.next:  " + current.next;
-                current = current.next;
-            }
-            writer.println(printStr);
-            writer.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        }
     }
 }

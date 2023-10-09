@@ -42,7 +42,7 @@ class Index4 {
             current = start;
             while (input.hasNext()) {   // Read all words in input
                 word = input.next();
-//***                System.out.println(word);
+                System.out.println(word);
                 tmp = new WikiItem(word, null);
                 current.next = tmp;
                 current = tmp;
@@ -61,8 +61,6 @@ class Index4 {
             currentDistinct = startDistinct;
             while (input.hasNext()) {   // Read all words in input
                 wordDistinct= input.next();
-                //System.out.println("fra distinct try word: " + wordDistinct);
-                //if (!search1(currentDistinct.str)){   // check if string already is in list
                 if (!search1(wordDistinct)){
                     tmpDistinct = new WikiItem(wordDistinct, null);
                     currentDistinct.next = tmpDistinct;
@@ -73,8 +71,6 @@ class Index4 {
         } catch (FileNotFoundException e) {
             System.out.println("Error reading file " + filename);
         }
-
-
     }
 
 
@@ -100,18 +96,15 @@ class Index4 {
         }
         return false;
     }
- 
 
 
-    /*public boolean search(String searchstr) {
+
+    public ReturnItem search2(String searchstr) {
         boolean exists = false;
         int occurences = 0;
         String documentName = start.str;
         String returnString = "";
         WikiItem current = start;
-        // ReturnItem startReturnItem, currentReturnItem, tmpReturnItem;
-
-        //documentName = current.str; // first document
         startDoc = null; // delete last search
         // startReturnItem = null;
 
@@ -144,10 +137,9 @@ class Index4 {
                 }
                 occurences = 0;
             }
-
             current = current.next;
         }
-        System.out.println("ReturnString:  \n" + returnString);
+        //System.out.println("ReturnString:  \n" + returnString);
 
         if (startReturnItem == null){
             startReturnItem = new ReturnItem(searchstr, startDoc, null);
@@ -160,17 +152,47 @@ class Index4 {
             currentReturnItem.next = new ReturnItem(searchstr, startDoc, null);
             currentReturnItem = currentReturnItem.next;
         }
+        returnString ="";
+        return startReturnItem;
+    }
 
-        skrivTilFil(startDoc);
+    public ReturnItem search3(String searchstr){
+        currentDistinct = startDistinct;
+        while (currentDistinct != null){
+            search2(currentDistinct.str);
+            currentDistinct = currentDistinct.next;
+        }
+        skrivTilFil(start,"WikiItemLstEjDistinct");
+        skrivTilFil(startDistinct,"../files/Words.txt");
         if(startReturnItem != null){
             if(startReturnItem.startDoc != null){
                 skrivReturnItemTilFil(startReturnItem);
             }
         }
-        //displayWikiList(startDoc);
-        returnString ="";
-        return exists;
-    } */
+        return startReturnItem;
+    }
+
+    public ReturnItem search4(String searchstr){
+        String word;
+        startReturnItem = search3(searchstr);
+        currentReturnItem = startReturnItem;
+        while (currentReturnItem != null){
+            if(currentReturnItem.searchstr.equals(searchstr)){
+                System.out.println("Documents containing the search string \" " + currentReturnItem.searchstr + "\": ");
+                System.out.println();
+                currentDoc = currentReturnItem.startDoc;
+                while (currentDoc!=null){
+                    // System.out.println(currentDoc.str);
+                    currentDoc = currentDoc.next;
+                }
+                //System.out.println(currentReturnItem.startDoc);
+
+                return currentReturnItem;
+            }
+            currentReturnItem = currentReturnItem.next;
+        }
+        return new ReturnItem("",new WikiItem("",null),null);
+    }
 
     public static void main(String[] args) {
         System.out.println("Preprocessing " + args[0]);
@@ -186,14 +208,15 @@ class Index4 {
                 break;
             }
             if (i.search(searchstr)) {
-                System.out.println(searchstr + " exists");
+                //System.out.println(searchstr + " exists in startDoc: ");
+                ReturnItem returnItem = i.search4(searchstr);
+                System.out.println(returnItem.searchstr);
+                i.displayWikiList(returnItem.startDoc);
             } else {
                 System.out.println(searchstr + " does not exist");
             }
         }
         console.close();
-        i.skrivTilFil(i.start,"WikiItemLstEjDistinct");
-        i.skrivTilFil(i.startDistinct,"WikiItemLstDistinct");
     }
 
 
@@ -202,21 +225,22 @@ class Index4 {
         WikiItem current = head;
         while (current != null){
             tal = tal +1; if(tal > 2889){break;}
-            System.out.println("   " + tal + "  ->" + current.str + "<-");
+            System.out.println("   " + tal + " : " + current.str);
             current = current.next;}
 
     }
 
     public void skrivTilFil(WikiItem head, String filnavn){
         try{
-            //PrintWriter writer = new PrintWriter("WikiItemsLst.txt");
-            PrintWriter writer = new PrintWriter("../files/ReturnItem.txt");
+            PrintWriter writer = new PrintWriter(filnavn);
+            //PrintWriter writer = new PrintWriter("../files/ReturnItem.txt");
             WikiItem current = head;
             while (current != null) {
                 writer.println("current object'et: " +
                         String.format("%25s", current)  +
                         "  current.str: " + String.format("%40s", current.str) +
-                        " current.next:  " + current.next );current= current.next;
+                        " current.next:  " + current.next );
+                current= current.next;
             }
             writer.close();
         } catch (FileNotFoundException e){System.out.println("file not found");}
@@ -239,10 +263,10 @@ class Index4 {
                     printStr += "  current.startDoc: <null>"; // Handle null case
                 }
 
-                printStr += " current.next:  " + current.next;
+                printStr += " current.next:  " + current.next + "\n";
                 current = current.next;
             }
-            writer.println(printStr);
+            writer.print(printStr);
             writer.close();
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
