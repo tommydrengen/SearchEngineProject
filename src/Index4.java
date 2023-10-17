@@ -6,6 +6,7 @@ class Index4 {
     WikiItem start, startDoc, tmpDoc, currentDoc;
     WikiItem startDistinct, currentDistinct, tmpDistinct;
     ReturnItem startReturnItem, currentReturnItem, tmpReturnItem;
+    HashTable hashTable;
 
 
     private class WikiItem {
@@ -28,6 +29,57 @@ class Index4 {
             searchstr  = str;
             startDoc = startDocument;
             next = n;
+        }
+    }
+
+    private class HashTable{
+        private static final int TABLE_SIZE = 10;
+        private class Row{
+            int key;
+            ReturnItem value;
+
+            public Row(int key, ReturnItem value){
+                this.key = key;
+                this.value = value;
+            }
+        }
+        Row[] rows;
+
+        HashTable(){
+            rows = new Row[TABLE_SIZE];
+        }
+
+        void insert(ReturnItem returnItem){
+            int index = hash(returnItem.searchstr);
+            if(rows[index] == null){
+                rows[index].value = returnItem;
+            }
+            else {
+                tmpReturnItem = rows[index].value;
+                while (tmpReturnItem.next != null){
+                    tmpReturnItem = tmpReturnItem.next;
+                }
+                tmpReturnItem.next = returnItem;
+                tmpReturnItem = tmpReturnItem.next;
+            }
+        }
+
+        ReturnItem get(String searchstr){
+            int index = hash(searchstr);
+            ReturnItem rowItem = rows[hash(searchstr)].value;
+            while (rowItem.searchstr != searchstr){
+                rowItem = rowItem.next;
+            }
+            return rowItem;
+        }
+
+        int hash(String str){
+            int hashcode = 0;
+            for( int j = 0; j < str.length(); j++){
+                hashcode += (int) str.charAt(j); // ASCII-value of the char
+            }
+            int index = hashcode % TABLE_SIZE;
+            return index;
         }
     }
 
@@ -156,13 +208,13 @@ class Index4 {
         return startReturnItem;
     }
 
-    public ReturnItem search3(String searchstr){
+    public ReturnItem search3(){ // make all ReturnItems
         currentDistinct = startDistinct;
         while (currentDistinct != null){
             search2(currentDistinct.str);
             currentDistinct = currentDistinct.next;
         }
-        skrivTilFil(start,"WikiItemLstEjDistinct");
+        //skrivTilFil(start,"WikiItemLstEjDistinct");
         skrivTilFil(startDistinct,"../files/Words.txt");
         if(startReturnItem != null){
             if(startReturnItem.startDoc != null){
@@ -174,7 +226,7 @@ class Index4 {
 
     public ReturnItem search4(String searchstr){
         String word;
-        startReturnItem = search3(searchstr);
+        // startReturnItem = search3(); // make all ReturnItems
         currentReturnItem = startReturnItem;
         while (currentReturnItem != null){
             if(currentReturnItem.searchstr.equals(searchstr)){
@@ -197,8 +249,19 @@ class Index4 {
     public static void main(String[] args) {
         System.out.println("Preprocessing " + args[0]);
         Index4 i = new Index4(args[0]);
+        i.search3(); //make all ReturnItems
         //i.displayWikiList(i.start);
         //for each word in start, call search
+
+        //test
+
+        ReturnItem tmpReturnItem = i.startReturnItem;
+        while (tmpReturnItem != null){
+            i.hashTable.insert(tmpReturnItem);
+        }
+        System.out.println("Hash table: " + i.hashTable);
+        System.out.println("Hash table: " + i.hashTable.get("Anarchism"));
+        System.out.println("Hash table start: " + i.hashTable.get(i.start.str) );
 
         Scanner console = new Scanner(System.in);
         for (;;) {

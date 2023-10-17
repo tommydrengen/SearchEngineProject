@@ -156,13 +156,13 @@ class Index3 {
         return startReturnItem;
     }
 
-    public ReturnItem search3(String searchstr){
+    public ReturnItem search3(){ // make all ReturnItems
         currentDistinct = startDistinct;
         while (currentDistinct != null){
             search2(currentDistinct.str);
             currentDistinct = currentDistinct.next;
         }
-        skrivTilFil(start,"WikiItemLstEjDistinct");
+        //skrivTilFil(start,"WikiItemLstEjDistinct");
         skrivTilFil(startDistinct,"../files/Words.txt");
         if(startReturnItem != null){
             if(startReturnItem.startDoc != null){
@@ -174,7 +174,7 @@ class Index3 {
 
     public ReturnItem search4(String searchstr){
         String word;
-        startReturnItem = search3(searchstr);
+        // startReturnItem = search3(); // make all ReturnItems
         currentReturnItem = startReturnItem;
         while (currentReturnItem != null){
             if(currentReturnItem.searchstr.equals(searchstr)){
@@ -197,6 +197,7 @@ class Index3 {
     public static void main(String[] args) {
         System.out.println("Preprocessing " + args[0]);
         Index3 i = new Index3(args[0]);
+        i.search3(); //make all ReturnItems
         //i.displayWikiList(i.start);
         //for each word in start, call search
 
