@@ -32,10 +32,25 @@ public class TestHashTable {
         System.out.println("ht.rows[0]: " + ht.rows[0] );
         System.out.println("ht.rows[1]: " + ht.rows[1] );
         //System.out.println("ht.rows[0] key : " + ht.rows[0].key );
-        System.out.println("ht.rows[0] key : " + ht.rows[8].key + "   value: " + ht.rows[8].value );
-        System.out.println("ht.rows[0] key : " + ht.rows[8].key + "   value.searchstr: " + ht.rows[8].value.searchstr );
-        System.out.println(" value.searchstr: " + ht.rows[8].value.searchstr + "   ht.rows.value.next: " + ht.rows[8].value.next );
-        System.out.println("slut fra constructori! "+ "\n" );
+        tmpReturnItem = startReturnItem;
+        while (tmpReturnItem != null){
+            System.out.println("ht.rows[0] key : " + ht.rows[ht.hash(tmpReturnItem.searchstr)].key + "   value: " + ht.rows[ht.hash(System.out.println("ht.rows[0] key : " + ht.rows[ht.hash(this.startReturnItem.searchstr)].key + "   value: " + ht.rows[ht.hash(this.startReturnItem.searchstr)].value );
+            System.out.println("ht.rows[0] key : " + ht.rows[ht.hash(this.startReturnItem.searchstr)].key + "   value.searchstr: " + ht.rows[ht.hash(this.startReturnItem.searchstr)].value.searchstr );
+            System.out.println(" value.searchstr: " + ht.rows[ht.hash(this.startReturnItem.searchstr)].value.searchstr + "   ht.rows.value: " + ht.rows[currentReturnItem.searchstr].value;
+            System.out.println("ht.rows[0] key : " + ht.rows[ht.hash(this.startReturnItem.searchstr)].key + "   value: " + ht.rows[ht.hash(this.startReturnItem.searchstr)].value );
+            System.out.println("ht.rows[0] key : " + ht.rows[ht.hash(this.startReturnItem.searchstr)].key + "   value.searchstr: " + ht.rows[ht.hash(this.startReturnItem.searchstr)].value.searchstr );
+            System.out.println(" value.searchstr: " + ht.rows[ht.hash(this.startReturnItem.searchstr)].value.searchstr + "   ht.rows.value.next: " + ht.rows[ht.hash(this.startReturnItem.searchstr)].value.next );
+            ReturnItem tmpReturnItem = ht.get(this.startReturnItem.searchstr);
+            System.out.println(tmpReturnItem);
+            ReturnItem tmpReturnItem = ht.get(this.tmpReturnItem.searchstr);
+            System.out.println(ht.get(tmpReturnItem.searchstr) );
+            System.out.println("ht.rows[0] key : " + ht.rows[ht.hash(tmpReturnItem.searchstr)].key + "   value.searchstr: " + ht.rows[ht.hash(this.tmpReturnItem.searchstr)].value.searchstr );
+            System.out.println(" value.searchstr: " + ht.rows[ht.hash(tmpReturnItem.searchstr)].value.searchstr + "   ht.rows.value.next: " + ht.rows[ht.hash(this.tmpReturnItem.searchstr)].value.next );
+            ReturnItem tmpReturnItem = ht.get(this.tmpReturnItem.searchstr);
+            System.out.println(tmpReturnItem);
+        }
+
+        System.out.println("slut fra constructor! "+ "\n" );
        /* System.out.println("fra ht.get(this.startReturnItem.searchstr);");
         System.out.println(ht.get(this.startReturnItem.searchstr));
         System.out.println("ht.get(this.startReturnItem.startDoc");
@@ -43,8 +58,7 @@ public class TestHashTable {
         System.out.println("ht.get(this.startReturnItem.next.searchstr)");
         System.out.println(ht.get(this.startReturnItem.next.searchstr));
 */
-        ReturnItem tmpReturnItem = ht.get("strng");
-        System.out.println(tmpReturnItem);
+
         //System.out.println("ReturnItem fra get: tmpReturnItem.searchstr " + tmpReturnItem.searchstr  + "tmpReturnItem.startDoc" + tmpReturnItem.startDoc + "" + "tmpReturnItem.next" + tmpReturnItem.next);
     }
 
@@ -81,19 +95,15 @@ public class TestHashTable {
             System.out.println("rows :" + rows );
         }
 
-//    void insert(ReturnItem rit){
-        //if(rows[0] == null){
-        //rows[0] = new Row(0, rit);
-        //rows[1] = new Row(1, rit);
-        //}
-        //}
 
         void insert(ReturnItem rit){
-            if(rows[8] == null){
-                rows[8] = new Row(8, rit);
+            int index = hash(rit.searchstr);
+            System.out.println("fra insert ");
+            if(rows[index] == null){  // hash(rit)
+                rows[index] = new Row(index, rit);
             }
             else{
-                tmpReturnItem = rows[8].value;
+                tmpReturnItem = rows[index].value;
                 while (tmpReturnItem.next != null){
                     tmpReturnItem = tmpReturnItem.next;
                 }
@@ -118,8 +128,9 @@ public class TestHashTable {
 
     ReturnItem get(String searchstr){
         int index = hash(searchstr);
-        System.out.println(searchstr + " hash value: " + hash(searchstr));
-        ReturnItem row = rows[hash(searchstr)].value;
+        Row currentRow = rows[index];
+        System.out.println( "fra get: " + searchstr + " hash value: " + hash(searchstr));
+        ReturnItem row = rows[index].value;
         while (row.searchstr != searchstr){
             row = row.next;
         }

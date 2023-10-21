@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.Scanner;
 
-class Index4 {
+class Index4F {
 
     WikiItem start, startDoc, tmpDoc, currentDoc;
     WikiItem startDistinct, currentDistinct, tmpDistinct;
@@ -102,15 +102,12 @@ class Index4 {
 
         ReturnItem get(String searchstr){
             int index = hash(searchstr);
-            if(rows[index]  != null){
-                System.out.println( "fra get: " + searchstr + " hash value: " + index);
-                ReturnItem row = ht.rows[hash(searchstr)].value;
-                while (!row.searchstr.equals(searchstr)){
-                    row = row.next;
-                }
-                return row;
+            System.out.println( "fra get: " + searchstr + " hash value: " + index);
+            ReturnItem row = rows[hash(searchstr)].value;
+            while (row.searchstr != searchstr){
+                row = row.next;
             }
-            return null;
+            return row;
         }
 
         int hash(String s) {
@@ -126,7 +123,7 @@ class Index4 {
 
 
 
-    public Index4(String filename) {
+    public Index4F(String filename) {
         String word , wordDistinct;
         WikiItem current, tmp;
         try {
@@ -290,7 +287,7 @@ class Index4 {
 
     public static void main(String[] args) {
         System.out.println("Preprocessing " + args[0]);
-        Index4 i = new Index4(args[0]);
+        Index4F i = new Index4F(args[0]);
         i.search3(); //make all ReturnItems
         i.ht.initHashTable();
         System.out.println(" size af i.ht.rows[3] :  " + i.returnItemListSize(i.ht.rows[3].value));
@@ -310,14 +307,9 @@ class Index4 {
             if (i.search(searchstr)) {
                 //System.out.println(searchstr + " exists in startDoc: ");
                 ReturnItem returnItem = i.search4(searchstr);
-                ReturnItem returnItem2 = i.ht.get(searchstr); //nyt hashtable
-                System.out.println("Searchtr: "+ searchstr);
-                System.out.println("Documents from hashtable: ");
-                WikiItem current = returnItem2.startDoc;
-                while (current != null){
-                    System.out.println("Document: " + current.str);
-                    current = current.next;
-                }
+//*                ReturnItem returnItem2 = i.ht.get(searchstr); //nyt hashtable
+//*                System.out.println(returnItem2.searchstr);
+                //*               i.displayWikiList(returnItem2.startDoc);
             } else {
                 System.out.println(searchstr + " does not exist");
             }
