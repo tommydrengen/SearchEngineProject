@@ -37,45 +37,19 @@ class Index1 {
     }
 
     public boolean search(String searchstr) {
-        boolean exists = false;
-        int occurences = 0;
-        String documentName = start.str;
-        String returnString = "";
         WikiItem current = start;
-
-        //documentName = current.str; // first document
-        
         while (current != null) {
             if (current.str.equals(searchstr)) {
-                occurences++;
-                exists = true;
+                return true;
             }
-            if (current.str.equals("---END.OF.DOCUMENT---")){
-                if(occurences > 0){
-                    returnString += documentName + ": " + occurences +"\n";
-                }
-                if (current.next != null) {
-                    documentName = "";
-                    while (!current.str.endsWith(".")){
-                        documentName += current.next.str + " "; // next document
-                        current = current.next;
-                    }
-                }
-                occurences = 0;
-            }
-
             current = current.next;
         }
-        System.out.println("ReturnString:  \n" + returnString);
-        returnString ="";
-        return exists;
+        return false;
     }
 
     public static void main(String[] args) {
         System.out.println("Preprocessing " + args[0]);
         Index1 i = new Index1(args[0]);
-        //i.displayWikiList(i.start);
-        //i.skrivTilFil(i.start);
         Scanner console = new Scanner(System.in);
         for (;;) {
             System.out.println("Input search string or type exit to stop");
@@ -90,28 +64,5 @@ class Index1 {
             }
         }
         console.close();
-    }
-
-
-    public void displayWikiList(WikiItem head){
-        int tal = 0;
-        WikiItem current = head;
-        while (current != null){
-            tal = tal +1; if(tal > 2889){break;}
-            System.out.println("   " + tal + "  ->" + current.str + "<-");
-            current = current.next;}
-
-    }
-
-    public void skrivTilFil(WikiItem head){
-        try{
-            PrintWriter writer = new PrintWriter("../files/output.txt");
-            WikiItem current = head;
-            while (current != null) {
-                writer.println(current.str );
-                current= current.next;
-            }
-            writer.close();
-        } catch (FileNotFoundException e){System.out.println("fil ikke fundet");}
     }
 }
