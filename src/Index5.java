@@ -87,7 +87,7 @@ class Index5 {
         ReturnItem get(String searchstr){
             int index = hash(searchstr);
             if(rows[index]  != null){
-                // System.out.println( "fra get: " + searchstr + " hash value: " + index);
+                System.out.println( "fra get: " + searchstr + " hash value: " + index);
                 ReturnItem row = ht.rows[hash(searchstr)].value;
                 while (!row.searchstr.equals(searchstr)){
                     row = row.next;
@@ -258,7 +258,7 @@ class Index5 {
         //skrivTilFil(startDistinct,"Words.txt");
         if(startReturnItem != null){
             if(startReturnItem.startDoc != null){
-                skrivReturnItemTilFil(startReturnItem);
+                //skrivReturnItemTilFil(startReturnItem);
             }
         }
         this.startReturnItem = startReturnItem;
@@ -302,6 +302,7 @@ class Index5 {
                 ReturnItem returnItem2 = i.ht.get(searchstr); //nyt hashtable
                 System.out.println("Searchtr: "+ searchstr);
                 System.out.println("Documents from hashtable: ");
+                // returnItem2.sort();
                 DocItem current = returnItem2.startDoc;
                 while (current != null){
                     System.out.println("Document: " + current.documentName + "\n occurences: " + current.occ);

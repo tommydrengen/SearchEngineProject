@@ -75,6 +75,11 @@ class Index4 {
                // System.out.println("hello fra insert efter indsæt , rows["+index+ "].value: " + rows[index].value );
             }
             else{
+                /*currentRI = rows[index].value;
+                while (currentRI.next != null){
+                    currentRI = currentRI.next;
+                }
+                currentRI.next = returnItem;*/
                // System.out.println("hello fra insert else, index er nu: " + index );
                // System.out.println("hello fra insert else, value i rows["+index+"] er: " + rows[index].value );
             }
@@ -273,7 +278,7 @@ class Index4 {
         Index4 i = new Index4(args[0]);
         i.search3(); //make all ReturnItems
         i.ht.initHashTable();
-        // i.ht.displayHashTable(i.ht);
+        i.ht.displayHashTable(i.ht);
         Scanner console = new Scanner(System.in);
         for (;;) {
             System.out.println("Input search string or type exit to stop");
