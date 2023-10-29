@@ -31,6 +31,31 @@ class Index5 {
             startDoc = startDocument;
             next = n;
         }
+        void sort(){ // bubblesort https://www.geeksforgeeks.org/sorting-a-singly-linked-list/
+            boolean swapped = false;
+            DocItem currentDoc, tmpDoc;
+            do {
+                swapped = false;
+                currentDoc = startDoc;
+                DocItem previousDoc = null;
+
+                while (currentDoc.next != null) {
+                    if (currentDoc.occ < currentDoc.next.occ) {
+                        if(previousDoc == null){
+                            startDoc = currentDoc.next;
+                        }
+                        else {
+                            previousDoc.next = currentDoc.next;
+                        }
+                        currentDoc.next = currentDoc.next.next;
+                        startDoc.next = currentDoc;
+                        swapped = true;
+                    }
+                    previousDoc = currentDoc;
+                    currentDoc = currentDoc.next;
+                }
+            } while (swapped);
+        }
     }
 
     public class HashTable{
@@ -302,11 +327,13 @@ class Index5 {
                 ReturnItem returnItem2 = i.ht.get(searchstr); //nyt hashtable
                 System.out.println("Searchtr: "+ searchstr);
                 System.out.println("Documents from hashtable: ");
-                // returnItem2.sort();
+                returnItem2.sort(); // går i staa
                 DocItem current = returnItem2.startDoc;
+                int rank = 1;
                 while (current != null){
-                    System.out.println("Document: " + current.documentName + "\n occurences: " + current.occ);
+                    System.out.println("Document: " + current.documentName + " rank: " + rank + "\n occurences: " + current.occ);
                     current = current.next;
+                    rank++;
                 }
             } else {
                 System.out.println(searchstr + " does not exist");
