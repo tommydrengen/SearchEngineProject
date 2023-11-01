@@ -70,9 +70,9 @@ class Index4 {
             // System.out.println("fra insert, rows["+index+ "]: " + rows[index] + "  index: " + index   );
             ReturnItem currentRI = returnItem;
             if(rows[index] == null){  // rows[hash(returnItem)]
-               // System.out.println("hello fra insert if , rows["+index+ "]: " + rows[index] );
+                // System.out.println("hello fra insert if , rows["+index+ "]: " + rows[index] );
                 rows[index] = new Row(index, returnItem);
-               // System.out.println("hello fra insert efter indsæt , rows["+index+ "].value: " + rows[index].value );
+                // System.out.println("hello fra insert efter indsæt , rows["+index+ "].value: " + rows[index].value );
             }
             else{
                 /*currentRI = rows[index].value;
@@ -80,8 +80,8 @@ class Index4 {
                     currentRI = currentRI.next;
                 }
                 currentRI.next = returnItem;*/
-               // System.out.println("hello fra insert else, index er nu: " + index );
-               // System.out.println("hello fra insert else, value i rows["+index+"] er: " + rows[index].value );
+                // System.out.println("hello fra insert else, index er nu: " + index );
+                // System.out.println("hello fra insert else, value i rows["+index+"] er: " + rows[index].value );
             }
         }
 
@@ -245,10 +245,10 @@ class Index4 {
             currentDistinct = currentDistinct.next;
         }
         //skrivTilFil(start,"WikiItemLstEjDistinct");
-        skrivTilFil(startDistinct,"Words.txt");
+        //skrivTilFil(startDistinct,"Words.txt");
         if(startReturnItem != null){
             if(startReturnItem.startDoc != null){
-                skrivReturnItemTilFil(startReturnItem);
+                // skrivReturnItemTilFil(startReturnItem);
             }
         }
         this.startReturnItem = startReturnItem;
@@ -278,7 +278,7 @@ class Index4 {
         Index4 i = new Index4(args[0]);
         i.search3(); //make all ReturnItems
         i.ht.initHashTable();
-        i.ht.displayHashTable(i.ht);
+        //i.ht.displayHashTable(i.ht);
         Scanner console = new Scanner(System.in);
         for (;;) {
             System.out.println("Input search string or type exit to stop");
