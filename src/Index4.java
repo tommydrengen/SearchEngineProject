@@ -67,21 +67,15 @@ class Index4 {
 
         void insert(ReturnItem returnItem){
             int index = hash(returnItem.searchstr);
-            // System.out.println("fra insert, rows["+index+ "]: " + rows[index] + "  index: " + index   );
             ReturnItem currentRI = returnItem;
             if(rows[index] == null){  // rows[hash(returnItem)]
-                // System.out.println("hello fra insert if , rows["+index+ "]: " + rows[index] );
-                rows[index] = new Row(index, returnItem);
-                // System.out.println("hello fra insert efter indsæt , rows["+index+ "].value: " + rows[index].value );
+                rows[index] = new Row(index, new ReturnItem(returnItem.searchstr, returnItem.startDoc, null  ));
             }
             else{
-                /*currentRI = rows[index].value;
-                while (currentRI.next != null){
-                    currentRI = currentRI.next;
-                }
-                currentRI.next = returnItem;*/
-                // System.out.println("hello fra insert else, index er nu: " + index );
-                // System.out.println("hello fra insert else, value i rows["+index+"] er: " + rows[index].value );
+                ReturnItem tmpReturnItemIns = rows[index].value;
+                while (tmpReturnItemIns.next != null ){
+                    tmpReturnItemIns = tmpReturnItemIns.next;}
+                tmpReturnItemIns.next = new ReturnItem(currentRI.searchstr, currentRI.startDoc, null  );
             }
         }
 
