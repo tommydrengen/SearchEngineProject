@@ -268,10 +268,19 @@ class Index4 {
     }
 
     public static void main(String[] args) {
+        long startTime=0;
+        long estimatedTime=0;
+        long preprocessingTime=0;
+        long searchTime=0;
         System.out.println("Preprocessing " + args[0]);
+        startTime = System.currentTimeMillis(); // start preprocessing clock
         Index4 i = new Index4(args[0]);
+        //
         i.search3(); //make all ReturnItems
         i.ht.initHashTable();
+
+        estimatedTime = System.currentTimeMillis() - startTime; // stop preprocessing clock
+        System.out.println("Preprocessing time: " + estimatedTime);
         //i.ht.displayHashTable(i.ht);
         Scanner console = new Scanner(System.in);
         for (;;) {
