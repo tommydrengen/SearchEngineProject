@@ -1,11 +1,10 @@
 import java.io.*;
 import java.util.Scanner;
 
-class Index6 {
+class Index4TimeSearch {
 
-    WikiItem start;
+    WikiItem start, startDoc, tmpDoc, currentDoc;
     WikiItem startDistinct, currentDistinct, tmpDistinct;
-    DocItem startDoc, tmpDoc, currentDoc;
     ReturnItem startReturnItem, currentReturnItem, tmpReturnItem;
     HashTable ht;
 
@@ -23,38 +22,13 @@ class Index6 {
     // klasse til at holde 3 felter
     private class ReturnItem{
         String      searchstr;
-        DocItem startDoc;
+        WikiItem startDoc;
         ReturnItem  next;
 
-        ReturnItem(String str, DocItem startDocument, ReturnItem n) {
+        ReturnItem(String str, WikiItem startDocument, ReturnItem n) {
             searchstr  = str;
             startDoc = startDocument;
             next = n;
-        }
-        void sort(){ // bubblesort https://www.geeksforgeeks.org/sorting-a-singly-linked-list/
-            boolean swapped = false;
-            DocItem currentDoc, tmpDoc;
-            do {
-                swapped = false;
-                currentDoc = startDoc;
-                DocItem previousDoc = null;
-
-                while (currentDoc.next != null) {
-                    if (currentDoc.occ < currentDoc.next.occ) {
-                        if(previousDoc == null){
-                            startDoc = currentDoc.next;
-                        }
-                        else {
-                            previousDoc.next = currentDoc.next;
-                        }
-                        currentDoc.next = currentDoc.next.next;
-                        startDoc.next = currentDoc;
-                        swapped = true;
-                    }
-                    previousDoc = currentDoc;
-                    currentDoc = currentDoc.next;
-                }
-            } while (swapped);
         }
     }
 
@@ -85,7 +59,7 @@ class Index6 {
 
 
         public void displayHashTable(HashTable ht){
-            for(int i=0; i<ht.rows.length;i++) {
+            for(int i=0; i<10;i++) {
                 System.out.println("ht.rows("+ i + ")  " + ht.rows[i] + "   length of linked list: " + returnItemListSize(ht.rows[i].value))  ;
             }
         }
@@ -93,15 +67,21 @@ class Index6 {
 
         void insert(ReturnItem returnItem){
             int index = hash(returnItem.searchstr);
+            // System.out.println("fra insert, rows["+index+ "]: " + rows[index] + "  index: " + index   );
             ReturnItem currentRI = returnItem;
             if(rows[index] == null){  // rows[hash(returnItem)]
-                rows[index] = new Row(index, new ReturnItem(returnItem.searchstr, returnItem.startDoc, null  ));
+                // System.out.println("hello fra insert if , rows["+index+ "]: " + rows[index] );
+                rows[index] = new Row(index, returnItem);
+                // System.out.println("hello fra insert efter indsæt , rows["+index+ "].value: " + rows[index].value );
             }
             else{
-                ReturnItem tmpReturnItemIns = rows[index].value;
-                while (tmpReturnItemIns.next != null ){
-                    tmpReturnItemIns = tmpReturnItemIns.next;}
-                tmpReturnItemIns.next = new ReturnItem(currentRI.searchstr, currentRI.startDoc, null  );
+                /*currentRI = rows[index].value;
+                while (currentRI.next != null){
+                    currentRI = currentRI.next;
+                }
+                currentRI.next = returnItem;*/
+                // System.out.println("hello fra insert else, index er nu: " + index );
+                // System.out.println("hello fra insert else, value i rows["+index+"] er: " + rows[index].value );
             }
         }
 
@@ -111,7 +91,7 @@ class Index6 {
         ReturnItem get(String searchstr){
             int index = hash(searchstr);
             if(rows[index]  != null){
-                System.out.println( "fra get: " + searchstr + " hash value: " + index);
+                // System.out.println( "fra get: " + searchstr + " hash value: " + index);
                 ReturnItem row = ht.rows[hash(searchstr)].value;
                 while (!row.searchstr.equals(searchstr)){
                     row = row.next;
@@ -132,23 +112,9 @@ class Index6 {
         }
     }
 
-    public class DocItem{
-        String searchstr;
-        String documentName;
-        int occ;
-        DocItem next;
-
-        public DocItem(String searchstr, String documentName, int occurences, DocItem next){
-            this.searchstr = searchstr;
-            this.documentName = documentName;
-            this.occ = occurences;
-            this.next = next;
-        }
-    }
 
 
-
-    public Index6(String filename) {
+    public Index4TimeSearch(String filename) {
         String word , wordDistinct;
         WikiItem current, tmp;
         try {
@@ -234,14 +200,14 @@ class Index6 {
                 if(occurences > 0){
                     returnString += documentName + ": " + occurences +"\n";
                     if (startDoc == null){
-                        startDoc = new DocItem(searchstr, documentName, occurences, null);
+                        startDoc = new WikiItem(documentName,null);
                     }
                     else {
                         currentDoc = startDoc;
                         while (currentDoc.next != null){
                             currentDoc = currentDoc.next;
                         }
-                        currentDoc.next = new DocItem(searchstr, documentName, occurences, null);
+                        currentDoc.next = new WikiItem(documentName, null);
                         currentDoc = currentDoc.next;
                     }
                 }
@@ -278,6 +244,13 @@ class Index6 {
             search2(currentDistinct.str);
             currentDistinct = currentDistinct.next;
         }
+        //skrivTilFil(start,"WikiItemLstEjDistinct");
+        //skrivTilFil(startDistinct,"Words.txt");
+        if(startReturnItem != null){
+            if(startReturnItem.startDoc != null){
+             //   skrivReturnItemTilFil(startReturnItem);
+            }
+        }
         this.startReturnItem = startReturnItem;
         return startReturnItem;
     }
@@ -297,36 +270,43 @@ class Index6 {
             }
             currentReturnItem = currentReturnItem.next;
         }
-        return new ReturnItem("",new DocItem("", "", 0, null),null);
+        return new ReturnItem("",new WikiItem("",null),null);
     }
 
     public static void main(String[] args) {
+        long startTime=0;
+        long estimatedTime=0;
+        long preprocessingTime=0;
+        long searchTime=0;
         System.out.println("Preprocessing " + args[0]);
-        Index6 i = new Index6(args[0]);
+        Index4TimeSearch i = new Index4TimeSearch(args[0]);
         i.search3(); //make all ReturnItems
         i.ht.initHashTable();
+        i.ht.displayHashTable(i.ht);
         Scanner console = new Scanner(System.in);
         for (;;) {
             System.out.println("Input search string or type exit to stop");
             String searchstr = console.nextLine();
+            startTime = System.currentTimeMillis(); // start search clock
             if (searchstr.equals("exit")) {
                 break;
             }
             if (i.search(searchstr)) {
+                //System.out.println(searchstr + " exists in startDoc: ");
+                //ReturnItem returnItem = i.search4(searchstr);
                 ReturnItem returnItem2 = i.ht.get(searchstr); //nyt hashtable
+                estimatedTime = System.currentTimeMillis() - startTime; // stop search clock
                 System.out.println("Searchtr: "+ searchstr);
                 System.out.println("Documents from hashtable: ");
-                if (returnItem2.startDoc != null) returnItem2.sort(); // går i staa uden null tjekket
-                DocItem current = returnItem2.startDoc;
-                int rank = 1;
+                WikiItem current = returnItem2.startDoc;
                 while (current != null){
-                    System.out.println("Document: " + current.documentName + " rank: " + rank + "\n occurences: " + current.occ);
+                    System.out.println("Document: " + current.str);
                     current = current.next;
-                    rank++;
                 }
             } else {
                 System.out.println(searchstr + " does not exist");
             }
+            System.out.println("Search time: " + estimatedTime);
         }
         console.close();
     }
@@ -392,7 +372,7 @@ class Index6 {
 
                 // Check if startDoc is not null before accessing its str property
                 if (current.startDoc != null) {
-                    printStr += "  current.startDoc: " + String.format("%40s", current.startDoc.documentName);
+                    printStr += "  current.startDoc: " + String.format("%40s", current.startDoc.str);
                 } else {
                     printStr += "  current.startDoc: <null>"; // Handle null case
                 }

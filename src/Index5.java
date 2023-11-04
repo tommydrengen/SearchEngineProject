@@ -85,7 +85,7 @@ class Index5 {
 
 
         public void displayHashTable(HashTable ht){
-            for(int i=0; i<10;i++) {
+            for(int i=0; i<ht.rows.length;i++) {
                 System.out.println("ht.rows("+ i + ")  " + ht.rows[i] + "   length of linked list: " + returnItemListSize(ht.rows[i].value))  ;
             }
         }
@@ -277,13 +277,6 @@ class Index5 {
         while (currentDistinct != null){
             search2(currentDistinct.str);
             currentDistinct = currentDistinct.next;
-        }
-        //skrivTilFil(start,"WikiItemLstEjDistinct");
-        //skrivTilFil(startDistinct,"Words.txt");
-        if(startReturnItem != null){
-            if(startReturnItem.startDoc != null){
-                //skrivReturnItemTilFil(startReturnItem);
-            }
         }
         this.startReturnItem = startReturnItem;
         return startReturnItem;

@@ -268,20 +268,10 @@ class Index4 {
     }
 
     public static void main(String[] args) {
-        long startTime=0;
-        long estimatedTime=0;
-        long preprocessingTime=0;
-        long searchTime=0;
         System.out.println("Preprocessing " + args[0]);
-        startTime = System.currentTimeMillis(); // start preprocessing clock
         Index4 i = new Index4(args[0]);
-        //
         i.search3(); //make all ReturnItems
         i.ht.initHashTable();
-
-        estimatedTime = System.currentTimeMillis() - startTime; // stop preprocessing clock
-        System.out.println("Preprocessing time: " + estimatedTime);
-        //i.ht.displayHashTable(i.ht);
         Scanner console = new Scanner(System.in);
         for (;;) {
             System.out.println("Input search string or type exit to stop");
@@ -290,12 +280,10 @@ class Index4 {
                 break;
             }
             if (i.search(searchstr)) {
-                //System.out.println(searchstr + " exists in startDoc: ");
-                //ReturnItem returnItem = i.search4(searchstr);
-                ReturnItem returnItem2 = i.ht.get(searchstr); //nyt hashtable
+                ReturnItem returnItem = i.ht.get(searchstr); //nyt hashtable
                 System.out.println("Searchtr: "+ searchstr);
                 System.out.println("Documents from hashtable: ");
-                WikiItem current = returnItem2.startDoc;
+                WikiItem current = returnItem.startDoc;
                 while (current != null){
                     System.out.println("Document: " + current.str);
                     current = current.next;
