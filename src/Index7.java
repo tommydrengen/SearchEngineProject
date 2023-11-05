@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.Scanner;
 
-class Index6 {
+class Index4 {
 
     WikiItem start, startDoc, tmpDoc, currentDoc;
     WikiItem startDistinct, currentDistinct, tmpDistinct;
@@ -108,7 +108,7 @@ class Index6 {
 
 
 
-    public Index6(String filename) {
+    public Index4(String filename) {
         String word , wordDistinct;
         WikiItem current, tmp;
         try {
@@ -269,7 +269,7 @@ class Index6 {
 
     public static void main(String[] args) {
         System.out.println("Preprocessing " + args[0]);
-        Index6 i = new Index6(args[0]);
+        Index4 i = new Index4(args[0]);
         i.search3(); //make all ReturnItems
         i.ht.initHashTable();
         Scanner console = new Scanner(System.in);
@@ -280,20 +280,13 @@ class Index6 {
                 break;
             }
             if (i.search(searchstr)) {
-                String s = searchstr;
-                while (!s.equals("")){
-                    if(i.search(s)){
-
-                        ReturnItem returnItem = i.ht.get(s); //nyt hashtable
-                        System.out.println("Searchtr: "+ s);
-                        System.out.println("Documents from hashtable: ");
-                        WikiItem current = returnItem.startDoc;
-                        while (current != null){
-                            System.out.println("Document: " + current.str);
-                            current = current.next;
-                        }
-                    }
-                    s = s.substring(0, s.length() - 1);
+                ReturnItem returnItem = i.ht.get(searchstr); //nyt hashtable
+                System.out.println("Searchtr: "+ searchstr);
+                System.out.println("Documents from hashtable: ");
+                WikiItem current = returnItem.startDoc;
+                while (current != null){
+                    System.out.println("Document: " + current.str);
+                    current = current.next;
                 }
             } else {
                 System.out.println(searchstr + " does not exist");
