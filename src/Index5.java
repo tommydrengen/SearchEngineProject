@@ -314,13 +314,11 @@ class Index5 {
                 break;
             }
             if (i.search(searchstr)) {
-                //System.out.println(searchstr + " exists in startDoc: ");
-                //ReturnItem returnItem = i.search4(searchstr);
-                ReturnItem returnItem2 = i.ht.get(searchstr); //nyt hashtable
+                ReturnItem returnItem = i.ht.get(searchstr); //nyt hashtable
                 System.out.println("Searchtr: "+ searchstr);
                 System.out.println("Documents from hashtable: ");
-                if (returnItem2.startDoc != null) returnItem2.sort(); // går i staa uden null tjekket
-                DocItem current = returnItem2.startDoc;
+                if (returnItem.startDoc != null) returnItem.sort(); // går i staa uden null tjekket
+                DocItem current = returnItem.startDoc;
                 int rank = 1;
                 while (current != null){
                     System.out.println("Document: " + current.documentName + " rank: " + rank + "\n occurences: " + current.occ);
