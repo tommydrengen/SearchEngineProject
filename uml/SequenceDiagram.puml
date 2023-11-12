@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Index5 -> Index5: Index5(): make linked list and hashtable
+Index5 --> Index5: search1(): make linked list of distinct words
+Index5 -> Index5: search3(): make all ReturnItems
+HashTable -> HashTable: initHashTable(): populate hashtable
+
+Index5 --> HashTable: search4(searchstr): user's search
+HashTable --> HashTable: get(searchstr)
+ReturnItem --> ReturnItem: sort()
+Index5 <-- HashTable:  ReturnItem
+
+@enduml
