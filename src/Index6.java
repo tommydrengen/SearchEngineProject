@@ -281,8 +281,8 @@ class Index6 {
             }
             if (i.search(searchstr)) {
                 String s = searchstr;
-                while (!s.equals("")){
-                    if(i.search(s)){
+                while (!s.equals("")){ // search all prefixes
+                    if(i.search1(s)){ // if s exists in startDistinct
 
                         ReturnItem returnItem = i.ht.get(s); //nyt hashtable
                         System.out.println("Searchtr: "+ s);

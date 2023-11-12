@@ -31,7 +31,7 @@ class Index5 {
             startDoc = startDocument;
             next = n;
         }
-        void sort(){ // bubblesort https://www.geeksforgeeks.org/sorting-a-singly-linked-list/
+        void sort(){ // bubblesort
             boolean swapped = false;
             DocItem currentDoc, tmpDoc;
             do {
