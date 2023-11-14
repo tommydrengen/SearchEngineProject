@@ -274,22 +274,78 @@ class Index7 {
         i.ht.initHashTable();
         Scanner console = new Scanner(System.in);
         for (;;) {
-            System.out.println("Input search string or type exit to stop");
-            String searchstr = console.nextLine();
-            if (searchstr.equals("exit")) {
+            System.out.println("Input search string 1 or type exit to stop");
+            String searchstr1 = console.nextLine();
+            System.out.println("Input search string 2 or type exit to stop");
+            String searchstr2 = console.nextLine();
+
+            if (searchstr1.equals("exit")) {
                 break;
             }
-            if (i.search(searchstr)) {
-                ReturnItem returnItem = i.ht.get(searchstr); //nyt hashtable
-                System.out.println("Searchtr: "+ searchstr);
-                System.out.println("Documents from hashtable: ");
-                WikiItem current = returnItem.startDoc;
+            if (i.search(searchstr1)) {
+                ReturnItem returnItem1 = i.ht.get(searchstr1); //nyt hashtable
+                ReturnItem returnItem2 = i.ht.get(searchstr2); //nyt hashtable
+                String returnStringAND = "";
+                String returnStringOR = "";
+                WikiItem tmpDoc1 = returnItem1.startDoc;
+                WikiItem tmpDoc2;
+                WikiItem startDoc;
+
+                //AND returnString
+                while (tmpDoc1 != null){
+                    tmpDoc2 = returnItem2.startDoc;
+                    while (tmpDoc2 != null){
+                        if ( tmpDoc1.str.equals(tmpDoc2.str)) returnStringAND += tmpDoc1.str + "\n";
+                        tmpDoc2 = tmpDoc2.next;
+                    }
+                    tmpDoc1 = tmpDoc1.next;
+                }
+
+                // AND print:
+                if(returnStringAND.length()>2) returnStringAND = returnStringAND.substring(0,returnStringAND.length()-2);
+                System.out.println("Searchtr: "+ searchstr1);
+                System.out.println("Documents from hashtable containing " + searchstr1 + " AND " + searchstr2 + ": ");
+                System.out.println("ReturnString: " + returnStringAND);//nyt
+                WikiItem current = returnItem1.startDoc;
                 while (current != null){
                     System.out.println("Document: " + current.str);
                     current = current.next;
                 }
+
+                // OR ReturnString:
+                returnStringOR = "";
+                tmpDoc1 = returnItem1.startDoc;
+                tmpDoc2 = returnItem2.startDoc;
+
+                 while (tmpDoc1 != null){
+                    returnStringOR += tmpDoc1.str + "\n";
+                    tmpDoc1 = tmpDoc1.next;
+                }
+                while (tmpDoc2 != null){
+                    if (!returnStringOR.contains(tmpDoc2.str)) returnStringOR += tmpDoc1.str + "\n";
+                    tmpDoc2 = tmpDoc2.next;
+                }
+
+                if(returnStringAND.length()>2) returnStringAND = returnStringAND.substring(0,returnStringAND.length()-2);
+                System.out.println("Searchtr: "+ searchstr1);
+                System.out.println("Documents from hashtable containing " + searchstr1 + " AND " + searchstr2 + ": ");
+                System.out.println("ReturnString: \n" + returnStringAND);//nyt
+                current = returnItem1.startDoc;
+                while (current != null){
+                    System.out.println("Document: " + current.str);
+                    current = current.next;
+                }
+                System.out.println("Documents from hashtable containing " + searchstr1 + " OR " + searchstr2 + ": ");
+                System.out.println("ReturnString: " + returnStringOR);//nyt
+                current = returnItem1.startDoc;
+                while (current != null){
+                    System.out.println("Document: " + current.str);
+                    current = current.next;
+                }
+
+
             } else {
-                System.out.println(searchstr + " does not exist");
+                System.out.println(searchstr1 + " does not exist");
             }
         }
         console.close();
