@@ -305,7 +305,7 @@ class Index7 {
                 if(returnStringAND.length()>2) returnStringAND = returnStringAND.substring(0,returnStringAND.length()-2);
                 System.out.println("Searchtr: "+ searchstr1);
                 System.out.println("Documents from hashtable containing " + searchstr1 + " AND " + searchstr2 + ": ");
-                System.out.println("ReturnString: " + returnStringAND);//nyt
+                System.out.println("\n" + returnStringAND);//nyt
                 WikiItem current = returnItem1.startDoc;
                 while (current != null){
                     System.out.println("Document: " + current.str);
@@ -318,34 +318,38 @@ class Index7 {
                 tmpDoc2 = returnItem2.startDoc;
 
                  while (tmpDoc1 != null){
-                    returnStringOR += tmpDoc1.str + "\n";
+                    returnStringOR += "Document: " + tmpDoc1.str + "\n";
                     tmpDoc1 = tmpDoc1.next;
                 }
                 while (tmpDoc2 != null){
-                    if (!returnStringOR.contains(tmpDoc2.str)) returnStringOR += tmpDoc1.str + "\n";
+                    if (!returnStringOR.contains(tmpDoc2.str)) returnStringOR += "Document: " + tmpDoc1.str + "\n";
                     tmpDoc2 = tmpDoc2.next;
                 }
 
                 if(returnStringAND.length()>2) returnStringAND = returnStringAND.substring(0,returnStringAND.length()-2);
-                System.out.println("Searchtr: "+ searchstr1);
-                System.out.println("Documents from hashtable containing " + searchstr1 + " AND " + searchstr2 + ": ");
-                System.out.println("ReturnString: \n" + returnStringAND);//nyt
+                System.out.println("Searchstr: "+ searchstr1 + ", " + searchstr2);
+                System.out.println("Documents containing " + searchstr1 + " AND " + searchstr2 + ": ");
+                //System.out.println("\n" + returnStringAND);//nyt
                 current = returnItem1.startDoc;
                 while (current != null){
                     System.out.println("Document: " + current.str);
                     current = current.next;
                 }
-                System.out.println("Documents from hashtable containing " + searchstr1 + " OR " + searchstr2 + ": ");
-                System.out.println("ReturnString: " + returnStringOR);//nyt
-                current = returnItem1.startDoc;
+                System.out.println();
+                System.out.println("Documents from hashtable containing " + searchstr1 + " OR " + searchstr2 + ": \n");
+                System.out.println(returnStringOR);//nyt
+                /*
+                current = returnItem2.startDoc;
                 while (current != null){
                     System.out.println("Document: " + current.str);
                     current = current.next;
                 }
+                */
 
 
             } else {
                 System.out.println(searchstr1 + " does not exist");
+                System.out.println(searchstr2 + " does not exist");
             }
         }
         console.close();
