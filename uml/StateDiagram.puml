@@ -1,0 +1,12 @@
+@startuml
+
+[*] --> WaitingForInput: Initialize Datastructures
+WaitingForInput : get input
+
+WaitingForInput -> searchingHashTable: searchstr
+searchingHashTable -> searchingRow: hash(searchstr)
+searchingRow -> searchingReturnItem
+searchingReturnItem -> WaitingForInput: ReturnItem
+WaitingForInput --> [*]: exit
+
+@enduml

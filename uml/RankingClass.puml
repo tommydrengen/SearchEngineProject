@@ -1,0 +1,54 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Index5{
+HashTable ht
+WikiItem start
+search():ReturnItem
+
+
+}
+Index5 -down-o HashTable
+Index5 -right-o WikiItem
+
+
+class WikiItem{
+str: String
+next: WikiItem
+}
+
+class DocItem{
+documentName: String
+occurences: int
+next: DocItem
+}
+
+class ReturnItem{
+searchstr: String
+startDoc: DocItem
+next: ReturnItem
+sort(): void
+
+}
+
+ReturnItem - DocItem: sort()
+
+class HashTable{
+rows: Row[]
+hash(): int
+insert(): void
+get(String): ReturnItem
+}
+
+class Row{
+key: int
+startReturnItem: ReturnItem
+}
+HashTable "1" -right-o "...*" Row
+Row  --o  ReturnItem
+ReturnItem -left-o DocItem
+
+
+
+
+@enduml
